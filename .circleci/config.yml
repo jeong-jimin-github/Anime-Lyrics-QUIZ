@@ -18,6 +18,9 @@ jobs:
           name: "Update"
           command: "pip3 install -U buildozer"
       - run:
+          name: "install"
+          command: "sudo apt-get install -y aidl autopoint gettext"
+      - run:
           name: "Build"
           command: "buildozer android debug"
 
