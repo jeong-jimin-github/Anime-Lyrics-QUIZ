@@ -15,6 +15,9 @@ jobs:
     steps:
       - checkout
       - run:
+          name: "Update"
+          command: "pip3 install -U buildozer"
+      - run:
           name: "Build"
           command: "buildozer android debug"
 
