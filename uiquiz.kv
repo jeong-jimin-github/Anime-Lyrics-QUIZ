@@ -1,0 +1,198 @@
+#:kivy 1.9.2
+<Home>:
+    padding: '5sp'
+    MDFloatingActionButtonSpeedDial:
+        data: root.data
+        rotation_root_button: True
+        callback: root.callback
+    BoxLayout:
+        orientation: 'vertical'
+        GridLayout:
+            padding: '8sp' 
+            rows:2
+            spacing: '5sp'
+            size_hint: (1,0.7)
+            Image:
+                source: 'screen.png'
+                keep_ratio: False
+                allow_stretch: False
+                
+            GridLayout:
+                cols: 1
+                rows: 1
+                padding: '8sp'
+                spacing: '5sp'
+                MDRaisedButton:
+                    text:'퀴즈 시작'
+                    size_hint_x: 10
+                    font_name: './font.ttf'
+                    on_press: root.manager.current='QuizScreen'          
+
+<End>:
+    BoxLayout:
+        orientation: 'vertical'
+        GridLayout:
+            padding: '8sp' 
+            rows:2
+            spacing: '5sp'
+            size_hint: (1,0.7)
+            Image:
+                source: 'screen.png'
+                keep_ratio: False
+                allow_stretch: False
+
+            GridLayout:
+                cols: 1
+                rows: 2
+                padding: '8sp'
+                spacing: '5sp'
+
+                Label:
+                    text: "퀴즈가 모두 끝났습니다."
+                    markup: True
+                    font_name: './font.ttf'
+                    color: 0,0,0,1
+                MDRaisedButton:
+                    text:'다시 시작'
+                    size_hint_x: 10
+                    font_name: './font.ttf'
+                    on_press: root.manager.current='QuizScreen'          
+<Bug>:
+    BoxLayout:
+        orientation: 'vertical'
+        MDTextField:
+            id: input
+            hint_text:'Input Your Message'
+            font_name: './font.ttf'
+            pos_hint: {'center_x': 0.5, 'center_y': 0.705}
+            size_hint: 0.95, 0.5
+        GridLayout:
+            padding: '8sp' 
+            rows:2
+            spacing: '5sp'
+            size_hint: (1,0.7)
+
+            GridLayout:
+                cols: 1
+                rows: 3
+                padding: '8sp'
+                spacing: '5sp'
+
+                Label:
+                    text: "입력하신 내용은 서버로 전송되오니\n개인정보를 입력하지 마세요.\n\n사진 첨부나 더 자세한 제보는\njmjeong10@gmail.com으로 보내주시면 됩니다."
+                    markup: True
+                    font_name: './font.ttf'
+                    color: 0,0,0,1
+                BoxLayout:
+                    padding: '5sp'
+                    size_hint_y: 0.25
+                    Button:
+                        md_bg_color: 0, 0, 1, 1
+                        background_normal: 'back.png'
+                        text:'돌아가기'
+                        font_name: './font.ttf'
+                        on_press: root.manager.current='HomeScreen'
+                    Button:
+                        md_bg_color: 1, 0, 0, 1
+                        pos_hint: {'right': 1}
+                        background_normal: 'red.png'
+                        text:'불편, 버그제보'
+                        font_name: './font.ttf'
+                        on_press: root.report()       
+<QuizScreen>:
+    BoxLayout:
+        orientation:'vertical'
+        GridLayout:
+            rows:2
+            padding: ['25sp','1sp']
+            size_hint_y: 0.13
+            canvas.before:
+                Color:
+                    rgb: (245/255,245/255,245/255)
+                Rectangle:
+                    size: self.size
+                    pos:  self.pos
+
+            Label:
+                text: "애니메이션 가사 퀴즈"
+                font_name: './font.ttf'
+                color: 0,0,0,1
+
+            BoxLayout:
+                Label:
+                    color: 0,0,0,1
+                    text: '문제 ' + str(root.page_number)
+                    font_name: './font.ttf'
+                Label:
+                    text: '틀림 ' + str(root.error_number)
+                    color: 0,0,0,1
+                    font_name: './font.ttf'
+                Label:
+                    text: '난이도 ' + str(root.level)
+                    color: 0,0,0,1
+                    font_name: './font.ttf'
+
+        Label:
+            text: root.error
+            size_hint_y: 0.08
+            text_size: self.width, None
+            height: self.texture_size[1]
+            font_size:'18sp'
+            markup: True
+            font_name: './font.ttf'
+            color: 0,0,0,1
+
+        Label:
+            id: label1
+            text: root.question  
+            size_hint_y: 0.34
+            color: 0,0,0,1
+            text_size: self.width, None
+            height: self.texture_size[1]
+            font_name: './font.ttf'
+            halign: 'center'         
+            markup: True
+
+        Button:
+            id:bttn1 
+            background_normal: 'sky.png'
+            text: root.ans                  
+            size_hint_y: 0.1
+            font_size: '20sp'
+            font_name: './font.ttf'
+            on_press: root.go_next(bttn1.text)   
+
+        Button:
+            id:bttn2
+            background_normal: 'sky.png'
+            text: root.ans1      
+            size_hint_y: 0.1
+            font_name: './font.ttf'
+            font_size: '20sp'
+            on_press: root.go_next(bttn2.text)  
+
+        Button:
+            id:bttn3
+            background_normal: 'sky.png'
+            text: root.ans2        
+            size_hint_y: 0.1
+            font_size: '20sp'
+            font_name: './font.ttf'
+            on_press: root.go_next(bttn3.text)  
+
+        BoxLayout:
+            padding: '5sp'
+            size_hint_y: 0.1
+            Button:
+                md_bg_color: 0, 0, 1, 1
+                background_normal: 'back.png'
+                text:'돌아가기'
+                font_name: './font.ttf'
+                on_press: root.manager.current='HomeScreen'
+            Button:
+                md_bg_color: 1, 0, 0, 1
+                pos_hint: {'right': 1}
+                background_normal: 'red.png'
+                text:'다시 시작하기'
+                font_name: './font.ttf'
+                on_press: root.restart()              
