@@ -39,7 +39,7 @@ class Bug(Screen):
             pass
         else:
             try:
-                webhook = DiscordWebhook(url='https://discord.com/api/webhooks/1035830865508450365/FQynVxJM8V7TJThrt3lmbhiiTxEuwlHsEq1LbN0Rz9YqFoYnxynOpgdESoE7zbLqTk4J', content=text)
+                webhook = DiscordWebhook(url='YOUR DISCORD WEBHOOK URL', content=text)
                 response = webhook.execute()
             except:
                 pass
