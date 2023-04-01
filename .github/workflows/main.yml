@@ -11,6 +11,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
+      - name: install
+        run: apt install gettext autopoint
+
       - name: Build with Buildozer
         uses: ArtemSBulgakov/buildozer-action@v1
         id: buildozer
