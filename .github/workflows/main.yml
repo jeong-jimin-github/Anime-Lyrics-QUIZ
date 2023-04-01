@@ -10,10 +10,11 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - name: Build with Buildozer
-        uses: ArtemSBulgakov/buildozer-action@v1
+      - name: install
         run: sudo apt install gettext
-        
+
+      - name: Build with Buildozer
+        uses: ArtemSBulgakov/buildozer-action@v1        
 id: buildozer
         with:
           workdir: .
