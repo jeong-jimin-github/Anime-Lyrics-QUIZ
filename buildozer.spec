@@ -25,7 +25,7 @@ source.exclude_dirs = tools
 version = 0.1
 
 # 애플리케이션 종속성
-requirements = python3, kivy, kivymd==1.0.2, pygments, sdl2_ttf==2.0.15, pillow, docutils, plyer, discord-webhook, pandas, kivy_garden, requests, urllib3, charset-normalizer, idna, chardet, android, jnius, kivmob
+requirements = requirements = kivy==master, https://github.com/kivymd/KivyMD/archive/master.zip, requests, urllib3, charset-normalizer, chardet, idna, discord-webhook, pandas, requests
 
 # 애플리케이션의 스플래시 화면
 presplash.filename = %(source.dir)s/data/presplash.png
